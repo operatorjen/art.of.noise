@@ -11,43 +11,52 @@
     <canvas id="a"></canvas>
     <h1>Iteration <span id="n">01</span>: Feedback Loops</h1>
     <time id="t">0</time>
-    <h3 id="cm"><a href=""></a></h3>
 
     <button id="bt">Next</button>
     <script id="sc" src=""></script>
     <script>
-      const commits = [
-        'https://github.com/operatorjen/art.of.noise/commit/652b63463da01d359880a0d416bb4607cc174b75',
-        'https://github.com/operatorjen/art.of.noise/commit/a2ccd0a14cd36bd9a335b1e8c8a459772c3746c9',
-        'https://github.com/operatorjen/art.of.noise/commit/5fc16cb251c61b6916f4a942bdf363265aeafbe8',
-        'https://github.com/operatorjen/art.of.noise/commit/f45b22533c7771c856e3835e173f086f74f5bc9f',
-        'https://github.com/operatorjen/art.of.noise/commit/92e38819c44ec279dd399b5682615b2aaa350463'
-      ]
+      const ITERATION_STATE = 6;
+      let onRes;
       let last = location.hash;
+      let loading = false;
       let total = parseInt(localStorage.getItem('art.of.noise'), 10) || 1;
       location.hash = `${('0' + total).slice(-2)}`;
       load();
       bt.addEventListener('click', () => {
         if (total > 99) total = 1;
-        total = (total >= commits.length) ? 1 : total + 1;
+        total = (total >= ITERATION_STATE) ? 1 : total + 1;
         location.hash = `${('0' + total).slice(-2)}`;
         localStorage.setItem('art.of.noise', total);
         load();
       });
 
       function load() {
-        if (sc) sc.remove();
+        if (loading) return;
+        loading = true;
+        window.exhibitStop?.();
         sc = document.createElement('script');
-        sc.id = 'sc';
-        sc.src = `./${String(total).padStart(2, '0')}.min.js`;
-        sc.addEventListener('load', () => {
-          console.log(`Exhibit loaded ${String(total).padStart(2, '0')}`);
-        });
+        sc.id  = 'sc';
+        sc.src = `./${String(total).padStart(2,'0')}.js`;
+        sc.onload = () => { 
+          window.exhibitStart?.();
+          loading = false;
+        }
         document.head.appendChild(sc);
         n.textContent = String(total).padStart(2, '0');
-        cm.querySelector('a').href = commits[total - 1];
-        cm.querySelector('a').textContent = `Commit: ${commits[total - 1].split('/').pop()}`;
       }
+
+      window.registerExhibit = function(setupFn, animateFn) {
+        onRes = setupFn;
+        window.exhibitStart = () => {
+          window.addEventListener('resize', onRes);
+          setupFn();
+          window.rafId = requestAnimationFrame(animateFn);
+        };
+        window.exhibitStop = () => {
+          cancelAnimationFrame(window.rafId);
+          window.removeEventListener('resize', onRes);
+        };
+      };
     </script>
   </body>
 </html>
