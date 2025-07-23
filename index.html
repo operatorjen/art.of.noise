@@ -11,19 +11,24 @@
     <canvas id="a"></canvas>
     <h1>Exhibit <span id="n">01</span>: Feedback Loops</h1>
     <time id="t">0</time>
-    <h3>2025</h3>
+    <h3 id="cm"><a href=""></a></h3>
 
     <button id="bt">Next</button>
     <script id="sc" src=""></script>
     <script>
+      const commits = [
+        'https://github.com/operatorjen/art.of.noise/commit/9f114497c077e144735075b9bee5af3736ab5581',
+        'https://github.com/operatorjen/art.of.noise/commit/f542ec27f47d9b2acd086ab533987778278b1874',
+        'https://github.com/operatorjen/art.of.noise/commit/9fb5357ec34d813dad8482b0022c74b4b9abe5cf',
+        'https://github.com/operatorjen/art.of.noise/commit/034771c84d49ac36c808673cacadb4ae99a0ed2b'
+      ]
       let last = location.hash;
-      let max = 3;
       let total = parseInt(localStorage.getItem('art.of.noise'), 10) || 1;
       location.hash = `${('0' + total).slice(-2)}`;
       load();
       bt.addEventListener('click', () => {
         if (total > 99) total = 1;
-        total = (total >= max) ? 1 : total + 1;
+        total = (total >= commits.length) ? 1 : total + 1;
         location.hash = `${('0' + total).slice(-2)}`;
         localStorage.setItem('art.of.noise', total);
         load();
@@ -39,6 +44,8 @@
         });
         document.head.appendChild(sc);
         n.textContent = String(total).padStart(2, '0');
+        cm.querySelector('a').href = commits[total - 1];
+        cm.querySelector('a').textContent = `Commit: ${commits[total - 1].split('/').pop()}`;
       }
     </script>
   </body>
