@@ -2,8 +2,6 @@
   let R = Math.random;
   let cv = a;
   let ctx = cv.getContext('2d');
-  let time = t;
-
   let off = cv.cloneNode();
   let ofx = off.getContext('2d');
 

@@ -5,13 +5,41 @@
     <meta charset=utf-8>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="feedback_loops.min.js" defer></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body id=b style="background-color:#111;">
     <canvas id="a"></canvas>
-    <h1>Exhibit 01: Feedback Loops</h1>
+    <h1>Exhibit <span id="n">01</span>: Feedback Loops</h1>
     <time id="t">0</time>
-    <h3>July 2025</h3>
+    <h3>2025</h3>
+
+    <button id="bt">Next</button>
+    <script id="sc" src=""></script>
+    <script>
+      let last = location.hash;
+      let max = 2;
+      let total = parseInt(localStorage.getItem('art.of.noise'), 10) || 1;
+      location.hash = `${('0' + total).slice(-2)}`;
+      load();
+      bt.addEventListener('click', () => {
+        if (total > 99) total = 1;
+        total = (total >= max) ? 1 : total + 1;
+        location.hash = `${('0' + total).slice(-2)}`;
+        localStorage.setItem('art.of.noise', total);
+        load();
+      });
+
+      function load() {
+        if (sc) sc.remove();
+        sc = document.createElement('script');
+        sc.id = 'sc';
+        sc.src = `./${String(total).padStart(2, '0')}.min.js`;
+        sc.addEventListener('load', () => {
+          console.log(`Exhibit loaded ${String(total).padStart(2, '0')}`);
+        });
+        document.head.appendChild(sc);
+        n.textContent = String(total).padStart(2, '0');
+      }
+    </script>
   </body>
 </html>

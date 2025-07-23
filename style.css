@@ -9,7 +9,7 @@ canvas {
   position: absolute;
 }
 
-h1, h3, time {
+h1, h3, time, button {
   position: fixed;
   top: 10px;
   right: 0;
@@ -30,4 +30,20 @@ h3 {
 
 time {
   top: 50px;
+}
+
+h1 span {
+  font-weight: 400;
+}
+
+button {
+  top: auto;
+  bottom: 10px;
+  z-index: 999;
+}
+
+button:hover {
+  background-color: #eee;
+  color: #111;
+  border: 1px solid #111;
 }
