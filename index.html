@@ -17,7 +17,7 @@
     <script id="sc" src=""></script>
     <script>
       let last = location.hash;
-      let max = 2;
+      let max = 3;
       let total = parseInt(localStorage.getItem('art.of.noise'), 10) || 1;
       location.hash = `${('0' + total).slice(-2)}`;
       load();
