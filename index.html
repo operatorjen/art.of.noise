@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
   </head>
-  <body id=b style="background-color:#111;">
+  <body id=b>
     <canvas id="a"></canvas>
     <h1>Iteration <span id="n">01</span>: Feedback Loops</h1>
     <time id="t">0</time>
@@ -15,7 +15,7 @@
     <button id="bt">Next</button>
     <script id="sc" src=""></script>
     <script>
-      const ITER = 8;
+      const ITER = 9;
       let onRes;
       let last = location.hash;
       let loading = false;
@@ -24,7 +24,6 @@
       location.hash = `${('0' + total).slice(-2)}`;
       load();
       bt.addEventListener('click', () => {
-        if (total > 99) total = 1;
         total = (total >= ITER) ? 1 : total + 1;
         location.hash = `${('0' + total).slice(-2)}`;
         localStorage.setItem('art.of.noise', total);
