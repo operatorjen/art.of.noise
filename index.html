@@ -15,11 +15,12 @@
     <button id="bt">Next</button>
     <script id="sc" src=""></script>
     <script>
-      const ITER = 7;
+      const ITER = 8;
       let onRes;
       let last = location.hash;
       let loading = false;
-      let total = parseInt(localStorage.getItem('art.of.noise'), 10) || 1;
+      let d = document, w = window;
+      let total = +localStorage.getItem('art.of.noise') || 1;
       location.hash = `${('0' + total).slice(-2)}`;
       load();
       bt.addEventListener('click', () => {
@@ -33,28 +34,28 @@
       function load() {
         if (loading) return;
         loading = true;
-        window.exhibitStop?.();
-        sc = document.createElement('script');
+        w.exhibitStop?.();
+        sc = d.createElement('script');
         sc.id  = 'sc';
         sc.src = `./${String(total).padStart(2,'0')}.min.js`;
         sc.onload = () => { 
-          window.exhibitStart?.();
+          w.exhibitStart?.();
           loading = false;
         }
-        document.head.appendChild(sc);
+        d.head.appendChild(sc);
         n.textContent = String(total).padStart(2, '0');
       }
 
-      window.registerExhibit = function(setupFn, animateFn) {
+      w.registerExhibit = function(setupFn, animateFn) {
         onRes = setupFn;
-        window.exhibitStart = () => {
-          window.addEventListener('resize', onRes);
+        w.exhibitStart = () => {
+          w.addEventListener('resize', onRes);
           setupFn();
-          window.rafId = requestAnimationFrame(animateFn);
+          w.rafId = requestAnimationFrame(animateFn);
         };
-        window.exhibitStop = () => {
-          cancelAnimationFrame(window.rafId);
-          window.removeEventListener('resize', onRes);
+        w.exhibitStop = () => {
+          cancelAnimationFrame(w.rafId);
+          w.removeEventListener('resize', onRes);
         };
       };
     </script>
