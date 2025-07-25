@@ -15,7 +15,7 @@
     <button id="bt">Next</button>
     <script id="sc" src=""></script>
     <script>
-      const ITERATION_STATE = 6;
+      const ITER = 7;
       let onRes;
       let last = location.hash;
       let loading = false;
@@ -24,7 +24,7 @@
       load();
       bt.addEventListener('click', () => {
         if (total > 99) total = 1;
-        total = (total >= ITERATION_STATE) ? 1 : total + 1;
+        total = (total >= ITER) ? 1 : total + 1;
         location.hash = `${('0' + total).slice(-2)}`;
         localStorage.setItem('art.of.noise', total);
         load();
@@ -36,7 +36,7 @@
         window.exhibitStop?.();
         sc = document.createElement('script');
         sc.id  = 'sc';
-        sc.src = `./${String(total).padStart(2,'0')}.js`;
+        sc.src = `./${String(total).padStart(2,'0')}.min.js`;
         sc.onload = () => { 
           window.exhibitStart?.();
           loading = false;

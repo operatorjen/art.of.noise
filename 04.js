@@ -6,7 +6,6 @@
   let o = off.getContext('2d');
 
   let nds = [];
-  let bts = [];
   let MAX = 250;;
 
   function createNode() {
@@ -39,25 +38,6 @@
     function animate() {
       o.fillStyle = `rgba(122, 28, 194, ${(R() * 0.06 - 0.001) + 0.001})`;
       o.fillRect(0, 0, off.width, off.height);
-
-      for (let i = bts.length - 1; i >= 0; i--) {
-        let b = bts[i];
-        b.x += b.vx;
-        b.y += b.vy;
-        b.a -= 0.02;
-        if (b.a <= 0) {
-          bts.splice(i, 1);
-        } else {
-          o.fillStyle = b.err > 0
-            ? `rgba(225,115,0,${b.a})`
-            : `rgba(238,43,226,${b.a})`;
-          let norm = Math.max(0, b.err / Math.PI);
-          let radius = b.err > 0 ? b.r * (1 + norm * 2) : b.r;
-          o.beginPath();
-          o.arc(b.x, b.y, radius, 0, Math.PI * 2);
-          o.fill();
-        }
-      }
 
       nds.forEach((n, idx) => {
         let leader = idx > 0 ? nds[idx - 1] : null;
