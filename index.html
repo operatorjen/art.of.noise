@@ -20,7 +20,7 @@
       let last = location.hash;
       let loading = false;
       let d = document, w = window;
-      let total = +localStorage.getItem('art.of.noise') || 1;
+      let total = +location.hash.split('#')[1] || +localStorage.getItem('art.of.noise') || 1;
       location.hash = `${('0' + total).slice(-2)}`;
       load();
       bt.addEventListener('click', () => {
