@@ -58,5 +58,11 @@
         };
       };
     </script>
+    <script src="https://operatorjen.github.io/systems.as.games/ECOSYSTEM/scripts/sag.pack.js"></script>
+    <script>
+      const s = window.SAG && SAG.get ? SAG.get() : {};
+      const active = (s.flags||[]).find(f => f.startsWith('active:SAG-'));
+      const code = active ? active.replace('active:','') : new URLSearchParams(location.search).get('code');
+    </script>
   </body>
 </html>
