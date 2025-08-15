@@ -9,6 +9,7 @@
   </head>
   <body id=b>
     <canvas id="a"></canvas>
+    <div id="world"></div>
     <h1>Iteration <span id="n">01</span>: Feedback Loops</h1>
     <time id="t">0</time>
 
@@ -59,10 +60,7 @@
       };
     </script>
     <script src="https://operatorjen.github.io/systems.as.games/ECOSYSTEM/scripts/sag.pack.js"></script>
-    <script>
-      const s = window.SAG && SAG.get ? SAG.get() : {};
-      const active = (s.flags||[]).find(f => f.startsWith('active:SAG-'));
-      const code = active ? active.replace('active:','') : new URLSearchParams(location.search).get('code');
-    </script>
+    <script type="module" src="https://operatorjen.github.io/systems.as.games/ECOSYSTEM/scripts/sag-worlds.js"></script>
+    <script type="module" src="https://operatorjen.github.io/systems.as.games/ECOSYSTEM/scripts/sag-world.js"></script>
   </body>
 </html>
