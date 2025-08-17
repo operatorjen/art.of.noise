@@ -73,3 +73,8 @@ a {
   box-shadow: rgba(39, 10, 103, 0.58) -13px -2px 2px;
   color: #e9de0c;
 }
+
+#home:hover {
+  background-color: rgba(31, 8, 239, 0.8);
+  color: rgb(242, 255, 0);
+}
