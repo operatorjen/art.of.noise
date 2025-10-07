@@ -1,6 +1,7 @@
-# art.of.noise
+# Art of Noise
 
-[View iteration gallery](https://operatorjen.github.io/art.of.noise)
+A sequence of generative sketches, where each iteration mutates parameters from the previous to produce new emergent motion.
 
-## Introduction
-When we think of a feedback loop, we often imagine a system feeding its previous state into the next, a closed cycle of cause and effect. In this project, each iteration is not passively generated but actively constructed, responding to an evolving ecology of internal feedback and external signals, drawn from both previous and anticipated future commits.
+Nine variations, one evolving system.
+
+_mutation as process (evolutionary systems)_
